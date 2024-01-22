@@ -37,6 +37,11 @@ endif
 " API functions
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+function! cmake#Root() abort
+    call s:logger.LogDebug('API invoked: cmake#Root()')
+    call s:buildsys.ChangeWorkspace()
+endfunction
+
 " API function for :CMakeGenerate and <Plug>(CMakeGenerate).
 "
 " Params:

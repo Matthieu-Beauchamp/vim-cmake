@@ -67,6 +67,8 @@ endif
 " Commands
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+command CMakeRoot call cmake#Root()
+
 command -nargs=? -bang CMakeGenerate call cmake#Generate(<bang>0, <f-args>)
 command -nargs=? CMakeClean call cmake#Clean()
 command -nargs=1 -complete=custom,cmake#GetConfigs CMakeSwitch call cmake#Switch(<f-args>)

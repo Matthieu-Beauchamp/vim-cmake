@@ -137,6 +137,16 @@ function! s:FindProjectRoot() abort
     return root
 endfunction
 
+" Allows changing the project root
+"
+" Returns:
+"     String
+"         path to workspace with root CMakeLists.txt
+function! s:buildsys.ChangeWorkSpace() abort
+    let root = s:buildsys.project_root()
+    let s:buildsys.project_root = input("Project root: ", root .. "/", "file")
+endfunction
+
 " Get absolute path to location where the build directory is located.
 "
 " Returns:
