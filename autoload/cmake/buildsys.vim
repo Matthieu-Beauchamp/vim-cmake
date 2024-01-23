@@ -137,17 +137,6 @@ function! s:FindProjectRoot() abort
     return root
 endfunction
 
-" Allows changing the project root
-"
-" Returns:
-"     String
-"         path to workspace with root CMakeLists.txt
-" function! s:buildsys.Root() abort
-function! cmake#buildsys#Root() abort
-    let root = s:buildsys.project_root
-    let s:buildsys.project_root = input("Project root: ", root .. "/", "file")
-endfunction
-
 " Get absolute path to location where the build directory is located.
 "
 " Returns:
@@ -405,6 +394,7 @@ endfunction
 function! s:buildsys.Init() abort
     " Must be done before any other initial configuration.
     let s:buildsys.project_root = s:system.Path([s:FindProjectRoot()], v:false)
+    call cmake#buildsys#Root()
     call s:logger.LogInfo('Project root: %s', s:buildsys.project_root)
 
     if g:cmake_restore_state
@@ -419,6 +409,17 @@ function! s:buildsys.Init() abort
 
     call s:RefreshConfigs()
     call s:RefreshTargets()
+endfunction
+
+" Allows changing the project root
+"
+" Returns:
+"     String
+"         path to workspace with root CMakeLists.txt
+" function! s:buildsys.Root() abort
+function! cmake#buildsys#Root() abort
+    let root = s:buildsys.project_root
+    let s:buildsys.project_root = input("Project root: ", root .. "/", "file")
 endfunction
 
 " Generate a buildsystem for the project using CMake.
