@@ -354,7 +354,7 @@ endfunction
 "
 function! s:SetCurrentConfig(config) abort
     let s:buildsys.current_config = a:config
-    let path = s:system.Path([s:GetBuildDirLocation(), a:config], v:false)
+    let path = s:system.Path([s:GetBuildDirLocation(), "build" . a:config], v:false)
     let s:buildsys.path_to_current_config = path
     call s:logger.LogInfo('Current config: %s (%s)',
         \ s:buildsys.current_config,
@@ -423,7 +423,7 @@ function! CheckHasCMakeLists() abort
     if ! HasCMakeLists()
         echohl WarningMsg
         echon "\n"
-        echomsg "Can't find " .. s:buildsys.project_root .. "CMakeLists.txt"
+        echomsg "Can't find " . s:buildsys.project_root .. "CMakeLists.txt"
         echohl None
     endif
 endfunction
