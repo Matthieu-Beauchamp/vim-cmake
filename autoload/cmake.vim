@@ -39,7 +39,7 @@ endif
 
 function! cmake#Root() abort
     call s:logger.LogDebug('API invoked: cmake#Root()')
-    call s:buildsys.ChangeWorkspace()
+    call cmake#buildsys#Root()
 endfunction
 
 " API function for :CMakeGenerate and <Plug>(CMakeGenerate).
