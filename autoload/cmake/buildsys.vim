@@ -416,7 +416,7 @@ function! s:buildsys.Init() abort
 endfunction
 
 function! HasCMakeLists() abort
-    return !filereadable(s:buildsys.project_root .. "CMakeLists.txt")
+    return filereadable(s:buildsys.project_root .. "CMakeLists.txt")
 endfunction
 
 function! CheckHasCMakeLists() abort
