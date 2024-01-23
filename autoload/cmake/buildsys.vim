@@ -394,7 +394,11 @@ endfunction
 function! s:buildsys.Init() abort
     " Must be done before any other initial configuration.
     let s:buildsys.project_root = s:system.Path([s:FindProjectRoot()], v:false)
-    call cmake#buildsys#Root()
+    
+    if ! HasCMakeLists()
+        call cmake#buildsys#Root()
+    endif
+
     call s:logger.LogInfo('Project root: %s', s:buildsys.project_root)
 
     if g:cmake_restore_state
@@ -409,6 +413,18 @@ function! s:buildsys.Init() abort
 
     call s:RefreshConfigs()
     call s:RefreshTargets()
+endfunction
+
+function! HasCMakeLists() abort
+    return !filereadable(s:buildsys.project_root .. "CMakeLists.txt")
+endfunction
+
+function! CheckHasCMakeLists() abort
+    if ! HasCMakeLists()
+        echohl WarningMsg
+        echomsg "Can't find " .. s:buildsys.project_root .. "CMakeLists.txt"
+        echohl None
+    endif
 endfunction
 
 " Allows changing the project root
