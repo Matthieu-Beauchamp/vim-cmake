@@ -422,6 +422,7 @@ endfunction
 function! CheckHasCMakeLists() abort
     if ! HasCMakeLists()
         echohl WarningMsg
+        echon "\n"
         echomsg "Can't find " .. s:buildsys.project_root .. "CMakeLists.txt"
         echohl None
     endif
@@ -436,7 +437,6 @@ endfunction
 function! cmake#buildsys#Root() abort
     let root = s:buildsys.project_root
     let s:buildsys.project_root = input("Project root: ", root .. "/", "file")
-    echomsg ""
     call CheckHasCMakeLists()
 endfunction
 
