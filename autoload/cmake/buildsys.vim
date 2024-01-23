@@ -436,6 +436,7 @@ endfunction
 function! cmake#buildsys#Root() abort
     let root = s:buildsys.project_root
     let s:buildsys.project_root = input("Project root: ", root .. "/", "file")
+    echomsg ""
     call CheckHasCMakeLists()
 endfunction
 
